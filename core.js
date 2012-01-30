@@ -5,6 +5,13 @@ var path = require('path');
 require('./ember-headless');
 require('./penumerable');
 
+
+/**
+   @param {Array} sources List of {file:..., data:...} structures
+   @param {String} outfile Path to output file
+   @param {String} wrapPattern Pattern in which the filename and file data are wrapped
+   @param {Function} transform A function that takes one String and returns another. transform is applied to each source                  
+ */
 function concatenateToFile(sources, outfile, wrapPattern, transform) {
   var stream;
   var outDir = path.dirname(path.resolve(process.cwd(), outfile));
@@ -24,6 +31,10 @@ function concatenateToFile(sources, outfile, wrapPattern, transform) {
   stream.end();
 }
 
+
+/**
+   @param {String} dir Path to directory that must be exist
+*/   
 function ensureDir(dir) {
   var depth;
   var path;
@@ -50,7 +61,11 @@ function hasCommandlineArg(theArg) {
   return process.argv.filter(function(i) { return i === theArg; }).length > 0;
 }
 
-function loadSettings(settingsFile, hasWatchCommandlineArg) {
+
+/**
+   @param {String} settingsFile Name of a JSON-formatted settings file
+*/
+function loadSettings(settingsFile) {
   var data;
   var settings;
   console.log('Loading settings from: ', settingsFile);
@@ -67,6 +82,11 @@ function loadSettings(settingsFile, hasWatchCommandlineArg) {
   return settings;
 }
 
+
+/**
+   @param {Array} sources List of source filenames
+   @param {Function} after The function to call after all the source files have been loaded   
+*/
 function readSource(sources, after) {
   console.log('Reading source files...');
   sources.pmap(fs.readFile, function(err, data, filename) {
@@ -76,6 +96,11 @@ function readSource(sources, after) {
  }
 
 
+/**
+   @param {Array} sources List of source filenames
+   @param {Function} onUpdates The function to invoke when any of the source files change.
+   The function takes two arguments: watchingMessage, and the filename of the file that changed   
+*/
 function watchForUpdates(sources, onUpdates) {
   var watchers = [];
   function watchingMessage() { console.log('\nWatching for updates...'); };
@@ -99,7 +124,7 @@ function watchForUpdates(sources, onUpdates) {
 
 /** EXPORTS **/
 
-exports.version = '0.0.1';
+exports.version = '0.0.2';
 
 exports.concatenateToFile = concatenateToFile;
 exports.ensureDir = ensureDir;
