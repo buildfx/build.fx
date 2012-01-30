@@ -5,18 +5,19 @@ var path = require('path');
 require('./ember-headless');
 require('./penumerable');
 
-function concatenateToFile(sources, outfile, wrapPattern) {
+function concatenateToFile(sources, outfile, wrapPattern, transform) {
   var stream;
   var outDir = path.dirname(path.resolve(process.cwd(), outfile));
 
   ensureDir(outDir);
   wrapPattern = wrapPattern || '/** Source: %@ **/\n %@';
+  transform = transform ? transform : function(text) { return text; };
   
   console.log('Concatenating to: ', outfile);
   
   stream = fs.createWriteStream(outfile);
   sources.forEach(function(s) {
-    var text =  wrapPattern.fmt(s.file, s.data.toString());
+    var text =  transform(wrapPattern.fmt(s.file, s.data.toString()));
     stream.write(new Buffer(text));
   });
 
