@@ -7,17 +7,17 @@ Build.fx is a nodejs-based framework for making lean build tools.
 Functions
 =========
 
-- function concatenateToFile(sources, outfile, wrapPattern, transform)
+- concatenateToFile(sources, outfile, wrapPattern, transform)
 
-- function ensureDir(dir)
+- ensureDir(dir)
 
-- function hasCommandlineArg(theArg)
+- hasCommandlineArg(theArg)
 
-- function loadSettings(settingsFile)
+- loadSettings(settingsFile)
 
-- function readSource(sources, after)
+- readSource(sources, after)
 
-- function watchForUpdates(sources, onUpdates)
+- watchForUpdates(sources, onUpdates)
 
 
 
