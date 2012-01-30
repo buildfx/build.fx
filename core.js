@@ -77,14 +77,21 @@ function readSource(sources, after) {
 
 
 function watchForUpdates(sources, onUpdates) {
+  var watchers = [];
   function watchingMessage() { console.log('\nWatching for updates...'); };
   watchingMessage();
-  sources.forEach(function(d) {
-    fs.watch(d, function(event, filename) {
+
+  watchers = sources.map(function(d) {
+    return fs.watch(d, function(event, filename) {
       console.log();
       util.log('Changed: ' + d);
-      onUpdates(watchingMessage);
+      onUpdates(watchingMessage, d);
     });
+  });
+
+  return watchers;
+  
+  sources.forEach(function(d) {
   });
 }
 
@@ -95,6 +102,7 @@ function watchForUpdates(sources, onUpdates) {
 exports.version = '0.0.1';
 
 exports.concatenateToFile = concatenateToFile;
+exports.ensureDir = ensureDir;
 exports.hasCommandlineArg = hasCommandlineArg;
 exports.loadSettings = loadSettings;
 exports.readSource = readSource;
