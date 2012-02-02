@@ -121,10 +121,22 @@ function watchForUpdates(sources, onUpdates) {
 }
 
 
+/**
+   @param {Object} theSettings
+   @param {Array} possibleSettings
+*/
+function printSettings(theSettings, possibleSettings) {
+  console.log('\nSETTINGS ');
+  possibleSettings.forEach(function(s) {
+    console.log(s + ': ', theSettings[s]);
+  });
+}
+
+
 
 /** EXPORTS **/
 
-exports.version = '0.0.2';
+exports.version = '0.0.3';
 
 exports.concatenateToFile = concatenateToFile;
 exports.ensureDir = ensureDir;
@@ -132,3 +144,4 @@ exports.hasCommandlineArg = hasCommandlineArg;
 exports.loadSettings = loadSettings;
 exports.readSource = readSource;
 exports.watchForUpdates = watchForUpdates;
+exports.printSettings = printSettings;
