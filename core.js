@@ -62,7 +62,8 @@ function hasCommandlineArg(theArg) {
 }
 
 function valueForCommandlineArg(theArg) {
-  var flagIndex = hasCommandlineArg(theArg) ? process.argv.indexOf(theArg) + 1 : undefined;
+  var flag = '--' + theArg;
+  var flagIndex = hasCommandlineArg(theArg) ? process.argv.indexOf(flag) + 1 : undefined;
   return flagIndex ? process.argv[flagIndex] : undefined;
 }
 
