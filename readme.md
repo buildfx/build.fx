@@ -19,6 +19,8 @@ Functions
 
 - watchForUpdates(sources, onUpdates)
 
+- valueForCommandlineArg(theArg)
+
 
 
 Specs

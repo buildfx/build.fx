@@ -1,3 +1,5 @@
+// These specs can be run with jasmine-node
+
 var fs = require('fs');
 var buildfx = require('../core');
 
@@ -136,7 +138,11 @@ describe('core', function() {
   });
 
   describe('hasCommandlineArg', function() {
-     /* No test */
+    //TODO: write a spec
+  });
+
+  describe('valueForCommandlineArg', function() {
+    //TODO: write a spec
   });
 
   describe('loadSettings', function() {

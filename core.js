@@ -61,6 +61,11 @@ function hasCommandlineArg(theArg) {
   return process.argv.filter(function(i) { return i === theArg; }).length > 0;
 }
 
+function valueForCommandlineArg(theArg) {
+  var flagIndex = hasCommandlineArg(theArg) ? process.argv.indexOf(theArg) + 1 : undefined;
+  return flagIndex ? process.argv[flagIndex] : undefined;
+}
+
 
 /**
    @param {String} settingsFile Name of a JSON-formatted settings file
@@ -136,7 +141,7 @@ function printSettings(theSettings, possibleSettings) {
 
 /** EXPORTS **/
 
-exports.version = '0.0.3';
+exports.version = '0.0.4';
 
 exports.concatenateToFile = concatenateToFile;
 exports.ensureDir = ensureDir;
@@ -145,3 +150,4 @@ exports.loadSettings = loadSettings;
 exports.readSource = readSource;
 exports.watchForUpdates = watchForUpdates;
 exports.printSettings = printSettings;
+exports.valueForCommandlineArg = valueForCommandlineArg;
