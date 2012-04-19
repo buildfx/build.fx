@@ -23,10 +23,10 @@ const (
 	DefaultDependRegexPattern = "@dep[end]*\\s(?P<filepath>[a-zA-Z./_0-9]+)"
 	regexFilepathGroupIndex   = 1
 
-	propertyValuePattern            = "(?P<propertyname>[a-zA-Z.]+)[\\s]*=[\\s]*(?P<propertyvalue>[[:graph:] ]+)"
+	propertyValuePattern            = "(?P<propertyname>[a-zA-Z._]+)[\\s]*=[\\s]*(?P<propertyvalue>[[:graph:] ]+)"
 	regexPropertyNameGroupIndex     = 1
 	regexPropertyValueGroupIndex    = 2
-	propertyNamePartPattern         = "\\$[a-zA-Z.]+\\$"
+	propertyNamePartPattern         = "\\$[a-zA-Z._]+\\$"
 	propertyNamePartNamedGroupIndex = 1
 )
 
