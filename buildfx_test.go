@@ -29,7 +29,7 @@ func TestResolveRelativePath(t *testing.T) {
 		ResolveRelativePath("lib/core.js", "controllers/reflex.js"),
 		ResolveRelativePath("lib/controllers/reflex.js", "../views/mutationView.js"),
 		ResolveRelativePath("lib/core.js", "../lib/preamble.js"),
-		ResolveRelativePath("lib/core.js", "util/view/progressive/animated/flying/delayedView.js"),
+		ResolveRelativePath("lib/core.js", "util/view/progressive/animated/flying/delayedView.js"),		
 	}
 
 	var expectation = []string{
@@ -37,7 +37,7 @@ func TestResolveRelativePath(t *testing.T) {
 		"lib/controllers/reflex.js",
 		"lib/views/mutationView.js",
 		"lib/preamble.js",
-		"lib/util/view/progressive/animated/flying/delayedView.js",
+		"lib/util/view/progressive/animated/flying/delayedView.js",		
 	}
 
 	if !reflect.DeepEqual(result, expectation) {
@@ -46,9 +46,9 @@ func TestResolveRelativePath(t *testing.T) {
 }
 
 func TestGetDep(t *testing.T) {
-	var source = []byte("// @depend sumer.js\n // @depend lib/luca.js\n// @depend blah.js")
+	var source = []byte("// @depend sumer.js\n // @depend lib/luca.js\n// @depend blah.js\n// @depend map-reduce.js")
 	var regex, _ = regexp.Compile(DefaultDependRegexPattern)
-	var expectation = []string{"sumer.js", "lib/luca.js", "blah.js"}
+	var expectation = []string{"sumer.js", "lib/luca.js", "blah.js", "map-reduce.js"}
 
 	if result := GetDeps(source, regex); !reflect.DeepEqual(expectation, result) {
 		t.Errorf("\nGot: %v.\nExpected: %v", result, expectation)
