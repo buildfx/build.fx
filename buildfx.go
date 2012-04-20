@@ -23,7 +23,7 @@ const (
 	DefaultDependRegexPattern = "@dep[end]*\\s(?P<filepath>[a-zA-Z./_0-9]+)"
 	regexFilepathGroupIndex   = 1
 
-	propertyValuePattern            = "(?P<propertyname>[a-zA-Z._]+)[\\s]*=[\\s]*(?P<propertyvalue>[[:graph:] ]+)"
+	propertyValuePattern            = "(?P<propertyname>[a-zA-Z._]+)[\\s]*?=[\\s]*?(?P<propertyvalue>[[:graph:] ]*)"
 	regexPropertyNameGroupIndex     = 1
 	regexPropertyValueGroupIndex    = 2
 	propertyNamePartPattern         = "\\$[a-zA-Z._]+\\$"
@@ -62,8 +62,12 @@ func MakePropertyMap(propertyFiles []string, dependRegex *regexp.Regexp) Propert
 	var addPropertyValuesFromBufferToMap = func(buffer bytes.Buffer, theMap *PropertyValues) {
 		for _, propVal := range propertyValueRegex.FindAllStringSubmatch(buffer.String(), -1) {
 			var propertyName = propVal[regexPropertyNameGroupIndex]
-			var propertyValue = propVal[regexPropertyValueGroupIndex]
-			propertyValues[propertyName] = propertyValue
+			if propertyValue := strings.Trim(propVal[regexPropertyValueGroupIndex], " "); len(propertyValue) > 0 {
+				fmt.Println("Property: ", propertyName)
+				fmt.Println("Value: ", propertyValue)
+				propertyValues[propertyName] = propertyValue	
+			}
+			
 		}
 	}
 

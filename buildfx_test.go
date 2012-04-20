@@ -64,6 +64,7 @@ func TestMakePropertyMap(t *testing.T) {
 		"APP.VERSION":      "0.1",
 		"TEXT.WELCOME":     "Welcome to Caprica; robot safehouse",
 		"TEXT_GOODBYE": 	"See ya later",
+		"APP.TIMEOUT":		"1000",
 	}
 
 	if !reflect.DeepEqual(propertyMap, expectation) {
